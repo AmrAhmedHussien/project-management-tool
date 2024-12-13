@@ -1,0 +1,5 @@
+allOf:
+
+  # Authentication
+  - $ref: "../Authentication/paths/login.yaml"
+

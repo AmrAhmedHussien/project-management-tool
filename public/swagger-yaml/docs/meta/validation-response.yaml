@@ -1,0 +1,11 @@
+validationError:
+  type: object
+  properties:
+    identifierCode:
+      type: integer
+      format: int32
+      example: 8888888888
+    message:
+      type: string
+    error:
+      type: object

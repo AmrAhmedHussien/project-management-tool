@@ -36,3 +36,9 @@ Route::name('oidc.')
         Route::get('redirect', [OidcAuthController::class, 'redirect'])->name('redirect');
         Route::get('callback', [OidcAuthController::class, 'callback'])->name('callback');
     });
+
+
+//swagger docs
+Route::get('/docs', function () {
+    return view('swagger');
+});    

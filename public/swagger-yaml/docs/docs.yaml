@@ -1,0 +1,24 @@
+swagger: "3.0"
+info:
+  description: "`Project Management Tool` Backend Available Api's."
+  version: "1.0"
+  title: "PMT"
+host: "127.0.0.1:8000"
+basePath: "/api"
+
+securityDefinitions:
+  Bearer :
+    in: header
+    type: apiKey
+    scheme: bearer
+    name: Authorization
+    description: "Authorization header <b>Bearer {token}</b>"
+cache:
+  caching: false
+paths:
+  allOf:
+    - $ref: "meta/paths.yaml"
+responses:
+  exception:
+    $ref: 'meta/error-response.yaml#ExceptionError'
+

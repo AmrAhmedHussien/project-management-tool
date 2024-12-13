@@ -1,0 +1,11 @@
+ExceptionError:
+  type: object
+  properties:
+    identifierCode:
+      type: integer
+      format: int32
+      example: 9999999999
+    message:
+      type: string
+    error:
+      type: object
