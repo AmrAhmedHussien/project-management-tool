@@ -25,6 +25,11 @@ class Project extends Model implements HasMedia
         'cover'
     ];
 
+    public function approveChains(): HasMany
+    {
+        return $this->hasMany(ProjectApproveChain::class,'project_id');
+    }
+
     public function owner(): BelongsTo
     {
         return $this->belongsTo(User::class, 'owner_id', 'id');

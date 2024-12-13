@@ -3,3 +3,6 @@ allOf:
   # Authentication
   - $ref: "../Authentication/paths/login.yaml"
 
+  # Approve chain
+  - $ref: "../ApproveChain/paths/store.yaml"
+
