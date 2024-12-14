@@ -269,6 +269,7 @@ class ProjectResource extends Resource
             RelationManagers\SprintsRelationManager::class,
             RelationManagers\UsersRelationManager::class,
             RelationManagers\StatusesRelationManager::class,
+            RelationManagers\ProjectChainRelationManager::class,
         ];
     }
 
