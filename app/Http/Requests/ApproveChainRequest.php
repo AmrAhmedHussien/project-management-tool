@@ -30,4 +30,11 @@ class ApproveChainRequest extends FormRequest
             'order' => ['required','integer','min:1',Rule::unique('project_approve_chains')->where('project_id',$this->project_id)],
         ];
     }
+    public function messages()
+    {
+        return [
+            'user_id.unique' => "This User Already Exist In The Chain",
+            'order.unique'   => "There Is Another User With This Order"
+        ];
+    }
 }

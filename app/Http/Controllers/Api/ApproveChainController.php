@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ApproveChainRequest;
+use App\Http\Resources\ApproveChainResource;
 use App\Models\ProjectApproveChain;
 use App\Notifications\ApproveProjectRequest;
 use Exception;
@@ -28,6 +29,21 @@ class ApproveChainController extends Controller
         catch(Exception $e)
         {
             DB::rollBack();
+            Log::error($e->getMessage());
+            return apiResponse(null,'Someting Went Wrong, Please Contact Support',400);
+        }
+    }
+    public function show($project_id)
+    {
+        try{
+           $approveChain = ProjectApproveChain::query()->with('user')->where('project_id',$project_id)->get();
+           if($approveChain)
+                return apiResponse(ApproveChainResource::collection($approveChain),'Approve Chain Returned Successfully',200);
+            else
+                return apiResponse(null,'No Approve Chain Added For This Project',200);
+        }
+        catch(Exception $e)
+        {
             Log::error($e->getMessage());
             return apiResponse(null,'Someting Went Wrong, Please Contact Support',400);
         }
