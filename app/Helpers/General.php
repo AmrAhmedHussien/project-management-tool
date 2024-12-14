@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\ProjectApproveChain;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 if (!function_exists('apiResponse')) {
@@ -31,5 +32,13 @@ if (!function_exists('checkIfUserCanApproveProject')) {
                 return true;
             else
                 return false;
+    }
+}
+
+if (!function_exists('getAvailableUsersToAddToChain')) {
+    function getAvailableUsersToAddToChain($project_id)
+    {
+        $added_users = ProjectApproveChain::query()->where('project_id',$project_id)->select('user_id')->pluck('user_id')->toArray();
+        return User::query()->whereNotIn('id',$added_users)->select('id','name')->pluck('name', 'id');
     }
 }

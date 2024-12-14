@@ -14,6 +14,7 @@ use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\Rule;
 
 class ApproveChainController extends Controller
 {
@@ -22,6 +23,33 @@ class ApproveChainController extends Controller
         try {
             DB::beginTransaction();
             $approveChain = ProjectApproveChain::query()->create($request->validated());
+            $user = $approveChain->nextUser();
+            $pravious_chains = ProjectApproveChain::query()->where('project_id', $request->project_id)->where('user_id', '<>', $request->user_id)->where('status', 'pending')->first();
+            $status_id = ProjectStatus::query()->select('id')->where('name', 'pending-approval')->first()->id;
+            $project = Project::query()->where('id', $request->project_id);
+            $project->update(['status_id' => $status_id]);
+            $project->first()->users()->syncWithoutDetaching([$request->user_id => ['role' => 'Approver']]);
+            if (!$pravious_chains)
+                $user->notify(new ApproveProjectRequest($approveChain->project_id));
+            DB::commit();
+            return apiResponse(new ApproveChainResource($approveChain), 'User Added To Approve Chain Successfully', 200);
+        } catch (Exception $e) {
+            DB::rollBack();
+            Log::error($e->getMessage());
+            return apiResponse(null, 'Someting Went Wrong, Please Contact Support', 400);
+        }
+    }
+    public function storeForFilament(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+            $rules = [
+                'project_id' => ['required',Rule::exists('projects','id')],
+                'user_id' => ['required',Rule::exists('users','id'),Rule::unique('project_approve_chains')->where('project_id',$request->project_id)],
+                'order' => ['required','integer','min:1',Rule::unique('project_approve_chains')->where('project_id',$request->project_id)],
+            ];
+            $validatedData = $request->validate($rules);
+            $approveChain = ProjectApproveChain::query()->create($validatedData);
             $user = $approveChain->nextUser();
             $pravious_chains = ProjectApproveChain::query()->where('project_id', $request->project_id)->where('user_id', '<>', $request->user_id)->where('status', 'pending')->first();
             $status_id = ProjectStatus::query()->select('id')->where('name', 'pending-approval')->first()->id;
