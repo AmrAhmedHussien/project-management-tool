@@ -1,0 +1,12 @@
+successfull:
+  type: object
+  properties:
+    data:
+      type: string
+      example: null
+    message:
+      type: string
+      example: "Project Approved Successfully"
+    status:
+      type: string
+      example: "true"

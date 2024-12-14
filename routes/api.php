@@ -21,5 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::group(['middleware'=>['auth:sanctum']],function(){
-    Route::apiResource('approve-chain',ApproveChainController::class);
+    Route::apiResource('project-approve-chain',ApproveChainController::class)->only('store','show');
+    Route::patch('project-approve-chain/{project_id}/approve',[ApproveChainController::class,'approve']);
 });

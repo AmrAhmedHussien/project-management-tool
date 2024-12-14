@@ -17,7 +17,11 @@ class ApproveChainResource extends JsonResource
         return [
             'id' => $this->id,
             'status' => $this->status,
-            'user' => $this->whenLoaded('user',fn() => new UserResource($this->user))
+            'order' => $this->order,
+            'user' => $this->whenLoaded('user', fn() => new UserResource($this->user)),
+            'approved_at' => $this->when($this->status == 'approved',$this->approved_at),
+            'created_at' => $this->created_at?->format('Y-m-d'),
+            'updated_at' => $this->updated_at?->format('Y-m-d'),
         ];
     }
 }

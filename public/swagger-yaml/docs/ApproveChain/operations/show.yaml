@@ -16,6 +16,8 @@ get:
   responses:
     '200':
       description: Successful operation
+      schema:
+        $ref: "../responses/show.yaml#successfull"
     '40X':
       description: Object not found
       schema:

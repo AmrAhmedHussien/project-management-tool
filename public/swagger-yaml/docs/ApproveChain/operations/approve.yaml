@@ -1,4 +1,4 @@
-post:
+patch:
   security:
     - Bearer : []
   tags:
@@ -9,25 +9,15 @@ post:
     - multipart/form-data  
   parameters:
     - name: project_id
-      in: formData
+      in: path
       type: integer
       description: project_id
-      example: 1
-    - name: user_id
-      in: formData
-      type: integer
-      description: user_id
-      example: 1
-    - name: order
-      in: formData
-      type: integer
-      description: order of the user in the chain
       example: 1
   responses:
     '200':
       description: Successful operation
       schema:
-        $ref: "../responses/store.yaml#successfull"
+        $ref: "../responses/approve.yaml#successfull"
     '40X':
       description: Object not found
       schema:

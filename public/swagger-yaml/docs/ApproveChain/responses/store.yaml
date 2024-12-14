@@ -1,0 +1,27 @@
+successfull:
+  type: object
+  properties:
+    data:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        status:
+          type: string
+          example: 1
+        items:
+          type: object
+          properties:  
+            id:
+              type: integer
+            name:
+              type: string
+            email:
+              type: string
+    message:
+      type: string
+      example: "Approve Chain Returned Successfully"
+    status:
+      type: string
+      example: "true"

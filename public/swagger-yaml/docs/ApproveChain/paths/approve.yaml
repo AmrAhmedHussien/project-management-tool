@@ -1,0 +1,3 @@
+/project-approve-chain/{project_id}/approve:
+  allOf:
+    - $ref: "../operations/approve.yaml"

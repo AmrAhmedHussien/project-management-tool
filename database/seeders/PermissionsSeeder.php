@@ -74,7 +74,7 @@ class PermissionsSeeder extends Seeder
         $role->syncPermissions(Permission::all()->pluck('name')->toArray());
 
         // Assign default role to first database user
-        if ($user = User::first()) {
+        foreach (User::all() as $user) {
             $user->syncRoles([$this->defaultRole]);
         }
     }
