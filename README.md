@@ -21,11 +21,8 @@ Before you begin, ensure you have the following installed on your machine:
 To get started, clone the repository from GitHub:
 
 ```bash
-git clone <repository-url>
-cd <repository-folder>
+git clone https://github.com/AmrAhmedHussien/project-management-tool.git
 ```
-Replace `<repository-url>` with the actual URL of the repository and `<repository-folder>` with the directory name.
-
 ---
 
 ## Installation Steps
@@ -44,14 +41,6 @@ Run the following command to install Node.js dependencies:
 
 ```bash
 npm install
-```
-
-### 2. Compile Assets
-
-Compile the project’s frontend assets using Vite:
-
-```bash
-npm run build
 ```
 
 ---
@@ -113,13 +102,6 @@ To start the development server, use the following command:
 
 ```bash
 php artisan serve
-```
-
-### Watching Frontend Changes
-To automatically rebuild frontend assets during development:
-
-```bash
-npm run dev
 ```
 
 ---
