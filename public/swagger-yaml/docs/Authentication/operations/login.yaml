@@ -1,0 +1,29 @@
+post:
+  tags:
+    - Authentication
+  summary: Login
+  description: Login 
+  consumes:
+    - multipart/form-data  
+  parameters:
+    - name: email
+      in: formData
+      type: string
+      description: email of user
+      example: "john.doe1@helper.app"
+    - name: password
+      in: formData
+      type: string
+      description: password of user
+      example: "Passw@rd"
+  responses:
+    '200':
+      description: Successful operation
+    '40X':
+      description: Object not found
+      schema:
+        $ref: "#/responses/exception"
+    '50X':
+      description: Some thing wrong
+      schema:
+        $ref: "#/responses/exception"

@@ -1,0 +1,3 @@
+/project-approve-chain:
+  allOf:
+    - $ref: "../operations/store.yaml"

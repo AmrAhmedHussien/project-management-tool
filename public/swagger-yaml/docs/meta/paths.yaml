@@ -1,0 +1,10 @@
+allOf:
+
+  # Authentication
+  - $ref: "../Authentication/paths/login.yaml"
+
+  # Approve chain
+  - $ref: "../ApproveChain/paths/store.yaml"
+  - $ref: "../ApproveChain/paths/show.yaml"
+  - $ref: "../ApproveChain/paths/approve.yaml"
+

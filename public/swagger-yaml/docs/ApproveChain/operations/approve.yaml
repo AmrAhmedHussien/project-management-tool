@@ -1,0 +1,28 @@
+patch:
+  security:
+    - Bearer : []
+  tags:
+    - ApproveChain
+  summary: create new approve chain for project
+  description: create new approve chain for project 
+  consumes:
+    - multipart/form-data  
+  parameters:
+    - name: project_id
+      in: path
+      type: integer
+      description: project_id
+      example: 1
+  responses:
+    '200':
+      description: Successful operation
+      schema:
+        $ref: "../responses/approve.yaml#successfull"
+    '40X':
+      description: Object not found
+      schema:
+        $ref: "#/responses/exception"
+    '50X':
+      description: Some thing wrong
+      schema:
+        $ref: "#/responses/exception"

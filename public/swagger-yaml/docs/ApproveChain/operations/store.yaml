@@ -1,0 +1,38 @@
+post:
+  security:
+    - Bearer : []
+  tags:
+    - ApproveChain
+  summary: create new approve chain for project
+  description: create new approve chain for project 
+  consumes:
+    - multipart/form-data  
+  parameters:
+    - name: project_id
+      in: formData
+      type: integer
+      description: project_id
+      example: 1
+    - name: user_id
+      in: formData
+      type: integer
+      description: user_id
+      example: 1
+    - name: order
+      in: formData
+      type: integer
+      description: order of the user in the chain
+      example: 1
+  responses:
+    '200':
+      description: Successful operation
+      schema:
+        $ref: "../responses/store.yaml#successfull"
+    '40X':
+      description: Object not found
+      schema:
+        $ref: "#/responses/exception"
+    '50X':
+      description: Some thing wrong
+      schema:
+        $ref: "#/responses/exception"
