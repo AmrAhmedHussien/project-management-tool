@@ -28,6 +28,7 @@ class ApproveChainRequest extends FormRequest
             'project_id' => ['required',Rule::exists('projects','id')],
             'user_id' => ['required',Rule::exists('users','id'),Rule::unique('project_approve_chains')->where('project_id',$this->project_id)],
             'order' => ['required','integer','min:1',Rule::unique('project_approve_chains')->where('project_id',$this->project_id)],
+            'status' => ['required','string']
         ];
     }
     public function messages()
@@ -36,5 +37,11 @@ class ApproveChainRequest extends FormRequest
             'user_id.unique' => "This User Already Exist In The Chain",
             'order.unique'   => "There Is Another User With This Order"
         ];
+    }
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'status' => 'pending'
+        ]);
     }
 }
